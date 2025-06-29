@@ -8,7 +8,7 @@ import math
 # cap.set(4, 720)   # Set height
 # cap.set(3, 640)  # Set width
 # cap.set(4, 480)   # Set height
-cap = cv2.VideoCapture('Demo Videos/bikes.mp4')  # Use a video file
+cap = cv2.VideoCapture('Demo Videos/store.mp4')  # Use a video file
 
 
 model = YOLO('Yolo-Weights/yolov8n.pt')
