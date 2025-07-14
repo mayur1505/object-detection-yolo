@@ -28,7 +28,7 @@ mask = cv2.imread('Project 4 - Store Detector/mask.png')
 tracker = Sort(max_age=30, min_hits=3, iou_threshold=0.3)
 
 # Line for entry/exit detection (adjust as needed)
-line = [(612, 115), (826, 115)]
+line = [(612, 110), (826, 110)]
 line_y = line[0][1]
 
 # Counters and tracking memory
@@ -94,14 +94,14 @@ while True:
                 total_entries += 1
                 cv2.line(img,(line[0]), (line[1]), (0, 255, 0), 5)
                 print(f"Entry Detected (ID: {id})")
-                del track_history[id]
+                #del track_history[id]
 
             # Exit: bottom → top
             elif prev_y > line_y and curr_y <= line_y:
                 total_exits += 1
                 cv2.line(img,(line[0]), (line[1]), (0, 255, 0), 5)
                 print(f"Exit Detected (ID: {id})")
-                del track_history[id]
+                #del track_history[id]
 
     # Display counts
     cvzone.putTextRect(img, f'Entries: {total_entries}', (20, 50), scale=2, thickness=2, offset=6)
