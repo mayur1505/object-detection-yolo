@@ -32,10 +32,12 @@ tracker = Sort(max_age=30, min_hits=3, iou_threshold=0.3)
 
 limits = [612,72, 826, 106]
 
+totalCount = []
 
 while True:
     success, img = cap.read()
     imgReigon = cv2.bitwise_and(img, mask)
+
     results = model(imgReigon, stream=True)
 
     detections = np.empty((0, 5))
@@ -83,6 +85,14 @@ while True:
         
         cx, cy = x1 + w // 2, y1 + h // 2
         cv2.circle(img, (cx, cy), 5, (0, 200, 0), cv2.FILLED)
+
+        if limits[0] < cx < limits[2] and limits[1]-20 < cy < limits[3]+20:
+            if totalCount.count(id) == 0:
+                totalCount.append(id)
+                cv2.line(img,(limits[0], limits[1]), (limits[2], limits[3]), (0, 255, 0), 5)
+
+    cvzone.putTextRect(img, f'Count: {len(totalCount)}', (50, 50),
+                                   scale=2, thickness=3, offset=10)
     cv2.imshow("Image", img)
     #cv2.imshow("ImageReigon", imgReigon)
     cv2.waitKey(1)
